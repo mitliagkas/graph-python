@@ -6,6 +6,7 @@ MAXVALUE=1e7
 def pagerank(a):
     x=np.ones((MAXVALUE,1))
     alpha=0.85
+
     for i in range(4):
         x/=np.linalg.norm(x)
         x=alpha*x+(1-alpha)*np.ones((MAXVALUE,1))
