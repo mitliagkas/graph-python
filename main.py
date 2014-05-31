@@ -1,30 +1,30 @@
 import graph
 import numpy as np
 
-MAXVALUE=1e7
+MAXVALUE = 1e7
+
 
 def pagerank(a):
-    x=np.ones((MAXVALUE,1))
-    alpha=0.85
+    x = np.ones((MAXVALUE, 1))
+    alpha = 0.85
 
     for i in range(4):
-        x/=np.linalg.norm(x)
-        x=alpha*x+(1-alpha)*np.ones((MAXVALUE,1))
+        x = a.dot(x)
+        x /= np.linalg.norm(x, ord=1)
+        x = alpha * x + (1 - alpha) * np.ones((MAXVALUE, 1)) / MAXVALUE
 
     return x
 
+A, indegree, outdegree = graph.gettwittergraph()
 
-if __name__ == '__main__':
+print A.nnz
 
-    A,indegree,outdegree=graph.gettwittergraph()
+# Ac=A.tocsc()
+Ar = A.tocsr()
 
-    print A.nnz
+x = pagerank(Ar)
 
-    #Ac=A.tocsc()
-    Ar=A.tocsr()
-
-    x=pagerank(Ar)
-
-    print x.T
-    print max(x)
+print x.T
+ind = np.argmax(x)
+print "Maximum of", x[ind], "at position", ind
 

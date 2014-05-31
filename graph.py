@@ -1,8 +1,9 @@
-#!/usr/bin/env python
+# !/usr/bin/env python
 """Create graph representations from files etc."""
 import csv
 import scipy as sp
 from scipy import sparse
+
 
 def gettwittergraph():
     """
@@ -16,29 +17,31 @@ def gettwittergraph():
     :returns : A scipy sparse matrix (dok) containing all edges.
     :rtype : scipy.sparse.dok_matrix, dict, dict
     """
-    filename='/var/datasets/twitter/twitter_combined.txt'
+    filename = '/var/datasets/twitter/twitter_combined.txt'
     reader = csv.reader(open(filename), delimiter=' ')
 
-    MAXINDEX=1e7
+    asd = "asdfasdasd"
 
-    A=sparse.dok_matrix((int(MAXINDEX), int(MAXINDEX)))
-    indegree=dict()
-    outdegree=dict()
+    MAXINDEX = 1e7
+
+    A = sparse.dok_matrix((int(MAXINDEX), int(MAXINDEX)))
+    indegree = dict()
+    outdegree = dict()
 
     for entry in reader:
-        src=int(entry[0])
-        dst=int(entry[1])
-        if src>MAXINDEX or dst>MAXINDEX:
+        src = int(entry[0])
+        dst = int(entry[1])
+        if src > MAXINDEX or dst > MAXINDEX:
             continue
-        A[dst, src]=1
+        A[dst, src] = 1
         try:
-            indegree[dst]+=1
+            indegree[dst] += 1
         except KeyError:
-            indegree[dst]=1
+            indegree[dst] = 1
 
         try:
-            outdegree[src]+=1
+            outdegree[src] += 1
         except KeyError:
-            indegree[src]=1
+            indegree[src] = 1
 
     return A, dict, dict
