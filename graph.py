@@ -5,7 +5,7 @@ import scipy as sp
 from scipy import sparse
 
 
-def gettwittergraph():
+def get_twitter_graph():
     """
         Reads the edge list from the twitter file
         http://snap.stanford.edu/data/egonets-Twitter.html
@@ -20,28 +20,26 @@ def gettwittergraph():
     filename = '/var/datasets/twitter/twitter_combined.txt'
     reader = csv.reader(open(filename), delimiter=' ')
 
-    asd = "asdfasdasd"
+    MAX_INDEX = 1e7
 
-    MAXINDEX = 1e7
-
-    A = sparse.dok_matrix((int(MAXINDEX), int(MAXINDEX)))
-    indegree = dict()
-    outdegree = dict()
+    A = sparse.dok_matrix((int(MAX_INDEX), int(MAX_INDEX)))
+    in_degree = dict()
+    out_degree = dict()
 
     for entry in reader:
         src = int(entry[0])
         dst = int(entry[1])
-        if src > MAXINDEX or dst > MAXINDEX:
+        if src > MAX_INDEX or dst > MAX_INDEX:
             continue
         A[dst, src] = 1
         try:
-            indegree[dst] += 1
+            in_degree[dst] += 1
         except KeyError:
-            indegree[dst] = 1
+            in_degree[dst] = 1
 
         try:
-            outdegree[src] += 1
+            out_degree[src] += 1
         except KeyError:
-            indegree[src] = 1
+            in_degree[src] = 1
 
     return A, dict, dict

@@ -15,7 +15,7 @@ def pagerank(a):
 
     return x
 
-A, indegree, outdegree = graph.gettwittergraph()
+A, indegree, outdegree = graph.get_twitter_graph()
 
 print A.nnz
 
