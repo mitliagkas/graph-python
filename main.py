@@ -27,4 +27,7 @@ x = pagerank(Ar)
 print x.T
 ind = np.argmax(x)
 print "Maximum of", x[ind], "at position", ind
+print "In degree", indegree[ind]
+
+
 

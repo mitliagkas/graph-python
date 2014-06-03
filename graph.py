@@ -42,4 +42,4 @@ def get_twitter_graph():
         except KeyError:
             in_degree[src] = 1
 
-    return A, dict, dict
+    return A, in_degree, out_degree
