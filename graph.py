@@ -1,8 +1,7 @@
 # !/usr/bin/env python
 """Create graph representations from files etc."""
 import csv
-import scipy as sp
-from scipy import sparse
+from scipy import sparse, stats
 
 
 def get_twitter_graph():
@@ -43,3 +42,26 @@ def get_twitter_graph():
             in_degree[src] = 1
 
     return A, in_degree, out_degree
+
+def algorithm_one(a):
+
+    alpha=0.1
+
+    n = a.shape[0]
+
+    rvs=stats.bernoulli.rvs(n**(alpha-1), size=n)
+
+    for n in range(n):
+        if rvs(n)==1:
+            with a[:,n].iterkeys() as out_neighbour:
+                counter+=1
+                degree_sum+=a[out_neighbour,n]
+
+    return degree_sum, counter
+
+
+
+
+
+
+
