@@ -15,19 +15,20 @@ def pagerank(a):
 
     return x
 
-A, indegree, outdegree = graph.get_twitter_graph()
+if __name__ == '__main__':
+    A, indegree, outdegree = graph.get_twitter_graph()
 
-print A.nnz
+    print A.nnz
 
-# Ac=A.tocsc()
-Ar = A.tocsr()
+    # Ac=A.tocsc()
+    Ar = A.tocsr()
 
-x = pagerank(Ar)
+    x = pagerank(Ar)
 
-print x.T
-ind = np.argmax(x)
-print "Maximum of", x[ind], "at position", ind
-print "In degree", indegree[ind]
+    print x.T
+    ind = np.argmax(x)
+    print "Maximum of", x[ind], "at position", ind
+    print "In degree", indegree[ind]
 
 
 
